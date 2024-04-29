@@ -1,81 +1,237 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-.container {
-  text-align: center;
-}
+/* CAKE! */
 
 .cake {
-  position: relative;
-  width: 150px;
-  height: 200px;
-  background-color: #fcf3cf;
-  border-radius: 20px;
-  margin-bottom: 20px;
-}
-
-.base {
-  width: 100%;
-  height: 50px;
-  background-color: #d35400;
-  border-radius: 0 0 20px 20px;
-}
-
-.candle {
-  position: absolute;
-  top: -40px;
-  left: 75px;
-  width: 5px;
-  height: 40px;
-  background-color: #f1c40f;
-}
-
-.flame {
-  position: absolute;
-  top: -60px;
-  left: 73px;
-  width: 10px;
-  height: 40px;
-  background-color: #ff0000;
-  border-radius: 50%;
-  animation: flameAnimation 0.5s infinite alternate-reverse;
-}
-
-@keyframes flameAnimation {
-  0% {
-    opacity: 0.5;
-    transform: translateY(-5px);
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    cursor: pointer;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(-10px);
+  
+  h1{
+    font-family: 'Great Vibes', cursive;
+
+    color: rgb(247, 247, 247);
+    text-align: center;
   }
-}
-
-.text {
-  margin-top: 20px;
-}
-
-input, button {
-  margin: 5px;
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
-}
-
-button {
-  background-color: #3498db;
-  color: #fff;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #2980b9;
-}
+  p{
+    text-align: center;
+    font-family:'Great Vibes';
+    color: rgb(247, 247, 247);
+    font-size: 18px;
+  }
+  /* wick */
+  
+  .cake::before {
+    position: absolute;
+    top: 60px;
+    left: 49%;
+    width: 4px;
+    height: 20px;
+    background: #555;
+    content: "";
+    transform: skew(4deg);
+    z-index: 5;
+  }
+  
+  /* Candle */
+  
+  .candle {
+    position: relative;
+    width: 30px;
+    height: 80px;
+    margin-top: 80px;
+    margin-inline: auto;
+    border-radius: 5px;
+    background: linear-gradient(#ffffff 50%, transparent 50%), #26493b;
+    background-size: 10px 10px;
+    z-index: 6;
+  }
+  
+  .candle::before,
+  .candle::after {
+    display: block;
+    position: relative;
+    top: -58px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+    background: darkorange;
+    transform: rotate(-45deg) translateX(-25%);
+    transform-origin: bottom center;
+    animation: candleMove 3s infinite;
+    opacity: 0.9;
+    content: "";
+  }
+  
+  .candle::after {
+    position: absolute;
+    top: -53px;
+    left: 17px;
+    width: 30px;
+    height: 30px;
+    background: orange;
+    animation: none;
+  }
+  
+  /* cake layers */
+  
+  .top-layer {
+    position: relative;
+    width: 78%;
+    height: 135px;
+    margin: 0 auto -13%;
+    border-radius: 56% 46% 46% 56% / 5% 5% 26% 26%;
+    background: #fff;
+    background: linear-gradient(90deg, #93c7b2 50%, transparent 50%),
+      radial-gradient(#ffffff 90%, transparent 10%), #ffffff;
+    background-size: 50% 20%, 50% 80%;
+    background-position: 87.5% 0, -37% -50%;
+    z-index: 3;
+  }
+  
+  .top-layer::before {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    border-radius: 50%;
+    background: #2e5545;
+    content: "";
+    transform: translateY(-45%);
+    z-index: 4;
+  }
+  
+  .bottom-layer {
+    position: relative;
+    height: 165px;
+    border-radius: 56% 46% 46% 56% / 5% 5% 20% 20%;
+    background: radial-gradient(#2e5545 20%, transparent 19%),
+      radial-gradient(#93c7b2 20%, #ffffff 19%), #c2eedc;
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+  }
+  
+  .bottom-layer::before {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 110px;
+    border-radius: 50%;
+    background: #2e5545;
+    content: "";
+    transform: translateY(-45%);
+    z-index: 2;
+  }
+  
+  /* Blow smoke-ish */
+  
+  .blow .candle::before,
+  .blow .candle::after {
+    animation: blowout 0.3s forwards;
+  }
+  
+  .blow .smoke {
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    border-radius: 50%;
+    background: whitesmoke;
+    opacity: 0;
+    animation: smoke 4s 0s infinite;
+    z-index: 3;
+  }
+  
+  .blow .smoke::before,
+  .blow .smoke::after {
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    border-radius: 50%;
+    background: whitesmoke;
+    opacity: 0;
+    animation: smoke 5s 1s infinite;
+    content: "";
+    z-index: 3;
+  }
+  
+  .smoke::before {
+    animation-delay: 0.2s;
+  }
+  
+  .smoke::after {
+    animation-delay: 2s;
+  }
+  
+  /* keyframes */
+  
+  @keyframes candleMove {
+    0%,
+    100% {
+      transform: rotate(-45deg) translateX(-25%) translateY(-1px);
+      border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+    }
+    30% {
+      transform: rotate(-43deg) translateX(-25%) translateY(0);
+      border-radius: 70% 0 55% 50% / 65% 0 80% 50%;
+    }
+    50% {
+      transform: rotate(-47deg) translateX(-25%) translateY(-2px);
+      border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+    }
+    70% {
+      transform: rotate(-43deg) translateX(-25%) translateY(0);
+      border-radius: 70% 0 55% 50% / 65% 0 80% 50%;
+    }
+  }
+  
+  @keyframes blowout {
+    from {
+      transform: scaleY(1) rotate(-45deg) translateX(-25%) translateY(-1px);
+      opacity: 1;
+      margin-top: 0;
+    }
+    to {
+      transform: scaleY(0) rotate(-45deg) translateX(-20%) translateY(-1px);
+      opacity: 0;
+      margin-top: 15px;
+    }
+  }
+  
+  @keyframes smoke {
+    0% {
+      transform: scale(0.2) translate(0, 0);
+    }
+    10% {
+      opacity: 1;
+      transform: scale(0.2) translate(0, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1) translate(-20px, -130px);
+    }
+  }
+  
+  /* General styling */
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: radial-gradient(#9198e5, #7745ff);
+  }
+  
